@@ -8,12 +8,19 @@ th.manual_seed(54321)
 
 from replaybuffer import ReplayBuffer
 from environment import Environment
+from network import Network
 
-BUFFER_SIZE = 10
+BUFFER_SIZE = 30_000
+BATCH_SIZE = 32
 
 def main():
     env = Environment()
     replay_buffer = ReplayBuffer(BUFFER_SIZE)
+    network = Network()
+
+
+
+    env.close()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
