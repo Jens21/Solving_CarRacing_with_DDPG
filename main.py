@@ -1,5 +1,10 @@
 from pyvirtualdisplay import Display
 import argparse
+import numpy as np
+import torch as th
+
+np.random.seed(12345)
+th.manual_seed(54321)
 
 from replaybuffer import ReplayBuffer
 from environment import Environment
@@ -20,7 +25,7 @@ if __name__ == '__main__':
     if args.display:
         display = Display(visible=0, size=(800, 600))
         display.start()
-        print('display started')
+        print('Display started')
 
     main()
 
