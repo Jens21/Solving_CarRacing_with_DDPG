@@ -21,14 +21,20 @@ class Environment():
         gray_img[img_crop[:, :, 0] == 255] = 1.
         gray_img[img_crop[:, :, 1] == 204] = 1.
         gray_img[(img_crop[:, :, 1] == 229) | (img_crop[:, :, 1] == 230)] = 1.
+        # gray_img = img_crop[:,:,1]/255.
+        gray_img = gray_img[::2, ::2]
 
         return gray_img
 
     def step(self, action):
         s, r, done, _ = self.env.step(action)
+        r = np.clip(r, -1, 100)
+        r /= 3.59
         self.s = self.edit_image(s)
         self.reward_per_round += r
         self.time_step += 1
+
+        # self.env.render()
 
         if done or self.time_step>=600:
             self.time_step = 0

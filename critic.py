@@ -3,16 +3,24 @@ import os
 
 class Critic(th.nn.Module):
     def __init__(self):
+        super(Critic, self).__init__()
+
         self.critic_policy = th.nn.Sequential(
-            th.nn.Linear(96*84+1+3),
+            #th.nn.Linear(96/3*84/3+1+3, 100),
+            th.nn.Linear(48*42+1+3, 100),
+            # th.nn.Linear(32*28+1+3, 100),
+            # th.nn.Linear(24*21+1+3, 100),
             th.nn.ReLU(),
-            th.nn.Linear(100, 3)
+            th.nn.Linear(100, 1)
         )
 
         self.critic_target = th.nn.Sequential(
-            th.nn.Linear(96*84+1),
+            #th.nn.Linear(96/3*84/3+1+3, 100),
+            th.nn.Linear(48*42+1+3, 100),
+            # th.nn.Linear(32*28+1+3, 100),
+            # th.nn.Linear(24*21+1+3, 100),
             th.nn.ReLU(),
-            th.nn.Linear(100, 3)
+            th.nn.Linear(100, 1)
         )
         self.critic_target.load_state_dict(self.critic_policy.state_dict())
 
